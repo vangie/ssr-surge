@@ -94,7 +94,7 @@ Merge Subscription：`http://ssr.surge/merge?url=<url1>&url=<url2>&url=<url3>`
 
 **Tips**
 1. The above two URLs can be used in a nested manner, such as converting a subscription first and then merging it
-2. <url>, <url1>. Need to do [URL Encoding](https://www.urlencoder.org/)
+2. `<url>`, `<url1>`, ... required [URL Encoding](https://www.urlencoder.org/)
 
 
 **Work through an example**
