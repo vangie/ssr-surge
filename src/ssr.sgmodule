@@ -1,0 +1,10 @@
+#!name=SSR Surge 
+#!desc=Convert SSR subscription to Surge external proxies.  github.com/vangie/ssr-surge
+
+[MITM]
+hostname=%APPEND% ssr.surge
+
+[Script]
+SSR Surge Converter=type=http-request,pattern=^https?:\/\/ssr\.surge\/conv,script-path=./ssr-surge-conv.js,timeout=120,ability=http-client-policy
+SSR Surge Merger=type=http-request,pattern=^https?:\/\/ssr\.surge\/merge,script-path=./ssr-surge-merge.js,timeout=120,ability=http-client-policy
+SSR Surge Cache=type=cron,cronexp=*/15 * * * *,script-path=./ssr-surge-cache.js,timeout=120,ability=http-client-policy,  

@@ -1,0 +1,34 @@
+on:
+  push:
+    # Sequence of patterns matched against refs/tags
+    tags:
+      - "v*.*.*"
+
+name: Publish
+
+jobs:
+  build:
+    name: Auto Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup
+        run: |
+          curl -fsSL https://esbuild.github.io/dl/latest | sh
+          sudo mv ./esbuild /usr/local/bin/
+        shell: bash
+      - name: Build
+        run: |
+          make all
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          files: |
+            ./dist/ssr-surge-conv.js
+            ./dist/ssr-surge-merge.js
+            ./dist/ssr-surge-cache.js
